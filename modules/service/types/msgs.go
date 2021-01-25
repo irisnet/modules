@@ -186,7 +186,7 @@ func (msg MsgBindService) ValidateBasic() error {
 	if err := ValidateOptions(msg.Options); err != nil {
 		return err
 	}
-	return ValidateBindingPricing(msg.Pricing)
+	return ValidatePricing(msg.Pricing)
 }
 
 // Normalize return a string with spaces removed and lowercase
@@ -274,7 +274,7 @@ func (msg MsgUpdateServiceBinding) ValidateBasic() error {
 	}
 
 	if len(msg.Pricing) != 0 {
-		return ValidateBindingPricing(msg.Pricing)
+		return ValidatePricing(msg.Pricing)
 	}
 	return nil
 }
