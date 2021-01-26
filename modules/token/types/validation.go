@@ -5,7 +5,6 @@ import (
 	"regexp"
 	"strings"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
@@ -44,11 +43,6 @@ var (
 
 // ValidateToken checks if the given token is valid
 func ValidateToken(token Token) error {
-	_, err := sdk.AccAddressFromBech32(token.Owner)
-	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
-	}
-
 	if len(token.Name) == 0 || len(token.Name) > MaximumNameLen {
 		return sdkerrors.Wrapf(ErrInvalidName, "invalid token name %s, only accepts length (0, %d]", token.Name, MaximumNameLen)
 	}
